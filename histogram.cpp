@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
   std::vector<int>::iterator maxCnt;
   maxCnt = std::max_element(cnt.begin(), cnt.end()-1);
 
-  for (int b=0, i=0; i < cnt.size(); b+=100, i++) {
+  for (int b=0, i=0; (unsigned) i < cnt.size(); b+=100, i++) {
     std::cout << std::setw(5) << b << std::setw(8) << cnt[i] << " ";
     std::cout << std::string(60 * cnt[i]/(*maxCnt), '*') << std::endl;
   }
