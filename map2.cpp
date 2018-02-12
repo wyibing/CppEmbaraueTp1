@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
         }
       }
     } else {
-      unordered_map<string, double>::iterator it;
+        unordered_map<string, double>::iterator it;
         if ((it = map.find(q)) != map.end()) {
           std::cout << "value[" << q << "]= "<< it->second << std::endl;
       } else {
