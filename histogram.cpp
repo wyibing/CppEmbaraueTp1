@@ -41,9 +41,10 @@ int main(int argc, char *argv[]) {
 
 //------------------------------------
   vector<int> cnt;
-  for (int b=100, s=0, i=0; ((unsigned)i < buf.size())&&(buf[i] < 8000); b+=100) {
-    for (s=0; ((unsigned)i < buf.size())&&(buf[i] < b); i++, s++) {}
-    cnt.push_back(s);
+  for (int b=100,s=0, i=0; ((unsigned) i < buf.size())&&(buf[i] < 8000); b+=100) {
+    s=i;
+    for (; buf[i] < b; i++) {}
+    cnt.push_back(i-s);
   }
   std::vector<int>::iterator maxCnt;
   maxCnt = std::max_element(cnt.begin(), cnt.end()-1);
