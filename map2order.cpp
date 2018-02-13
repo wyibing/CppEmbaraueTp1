@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
       map<double, string>::iterator it;
       for (it = map2.begin(); it->first < 0.99*v; it++) {}
       for (; it->first <1.01*v; it++) {
-        std::cout << "value[" << it->first << "]= " << it->second << std::endl;
+        std::cout << "value[" << it->second << "]= " << it->first << std::endl;
       }
 
     } else {
