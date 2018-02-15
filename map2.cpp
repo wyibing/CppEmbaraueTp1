@@ -2,6 +2,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <map>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -9,7 +10,6 @@
 #include <cmath>
 
 using std::string;
-using std::unordered_map;
 
 int main(int argc, char *argv[]) {
   if (argc < 2) {
@@ -17,7 +17,8 @@ int main(int argc, char *argv[]) {
     return EXIT_FAILURE;
   }
   string file_name{argv[1]};
-  unordered_map<string, double> map;
+  std::unordered_map<string, double> map1;
+  std::multimap<double, string> map2;
   std::ifstream fin(file_name, std::ios::in);
   string line;
 
@@ -26,8 +27,10 @@ int main(int argc, char *argv[]) {
     string key;
     double value;
     stream >> key >> value;
-    map.insert(std::make_pair(key, value));
+    map1.insert(std::make_pair(key, value));
+    map2.insert(std::make_pair(value, key));
   }
+
   while (1) {
     string q;
     std::cout << "query> ";
@@ -36,18 +39,19 @@ int main(int argc, char *argv[]) {
       std::cout << "Bye..." << std::endl;
       break;
     }
-    if (q.at(0) == '+') {
+    if (q[0] == '+') {
       auto v = std::stod(q);
-      unordered_map<string, double>::iterator it;
-      for (it = map.begin(); it != map.end(); it++) {
-        if (std::abs(it->second - v) < (0.01*(it->second))) {
-          std::cout << "value[" << it->first
-                    << "]= " << it->second << std::endl;
-        }
+      std::map<double, string>::iterator it, itlow, itup;
+      itlow = map2.lower_bound(0.99*v);
+      itup = map2.upper_bound(1.01*v);
+      for (it = itlow; it != itup; it++) {
+        std::cout << "value[" << it->second << "]= " << it->first << std::endl;
       }
+      if (itlow == itup) std::cout << "No value in the interval" << std::endl;
+
     } else {
-        unordered_map<string, double>::iterator it;
-        if ((it = map.find(q)) != map.end()) {
+        std::unordered_map<string, double>::iterator it;
+        if ((it = map1.find(q)) != map1.end()) {
           std::cout << "value[" << q << "]= "<< it->second << std::endl;
       } else {
         std::cout << "This ID does not exist" << std::endl;
