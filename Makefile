@@ -8,7 +8,7 @@ CFLAGS_COMMON	+= -std=c++17
 CFLAGS_DEBUG	:= $(CFLAGS_COMMON) -O -g
 CFLAGS		:= $(CFLAGS_COMMON) -O3
 
-all:		histogram.cpp	map1.cpp	map2.cpp	distrib.cpp
+all:		histogram.cpp	map1.cpp	map2.cpp	distrib.cpp	map2order.cpp
 
 histogram: 	histogram.cpp 
 		$(CC) histogram.cpp -o histogram $(CFLAGS)
@@ -21,3 +21,5 @@ map2: 		map2.cpp
 
 distrib: 	distrib.cpp 
 		$(CC) distrib.cpp -o distrib $(CFLAGS)
+
+
