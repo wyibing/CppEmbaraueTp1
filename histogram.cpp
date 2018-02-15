@@ -41,15 +41,16 @@ int main(int argc, char *argv[]) {
 
 //------------------------------------
   vector<int> cnt;
-  for (int b=100,s=0, i=0; ((unsigned) i < buf.size())&&(buf[i] < 8000); b+=100) {
-    s=i;
+  unsigned int l = 0;
+  for (int b=100, s=0; (l < buf.size())&&(buf[i] < 8000); b+=100) {
+    s = i;
     for (; buf[i] < b; i++) {}
     cnt.push_back(i-s);
   }
   std::vector<int>::iterator maxCnt;
   maxCnt = std::max_element(cnt.begin(), cnt.end()-1);
-
-  for (int b=0, i=0; (unsigned) i < cnt.size(); b+=100, i++) {
+  l = 0;
+  for (int b=0; l < cnt.size(); b+=100, i++) {
     std::cout << std::setw(5) << b << std::setw(8) << cnt[i] << " ";
     std::cout << std::string(60 * cnt[i]/(*maxCnt), '*') << std::endl;
   }
