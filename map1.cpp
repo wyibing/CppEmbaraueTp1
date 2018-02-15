@@ -8,7 +8,6 @@
 #include <utility>
 
 using std::string;
-using std::unordered_map;
 
 int main(int argc, char *argv[]) {
   if (argc < 2) {
@@ -16,7 +15,7 @@ int main(int argc, char *argv[]) {
     return EXIT_FAILURE;
   }
   string file_name{argv[1]};
-  unordered_map<std::string, double> map;
+  std::unordered_map<std::string, double> map;
   std::ifstream fin(file_name, std::ios::in);
   string line;
 
@@ -29,7 +28,7 @@ int main(int argc, char *argv[]) {
   }
   while (1) {
     string q;
-    unordered_map<string, double>::iterator it;
+    std::unordered_map<string, double>::iterator it;
     std::cout << "query> ";
     std::cin >> q;
     if (q == "END") {
